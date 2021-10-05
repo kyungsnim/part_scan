@@ -1,17 +1,23 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:part_scan/display_picture_screen.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:share/share.dart';
 
 // 사용자가 주어진 카메라를 사용하여 사진을 찍을 수 있는 화면
 class TakePictureScreen extends StatefulWidget {
   final CameraDescription camera;
 
   const TakePictureScreen({
+    Key? key,
     required this.camera,
-  });
+  }) : super(key: key);
 
   @override
   TakePictureScreenState createState() => TakePictureScreenState();
@@ -20,6 +26,7 @@ class TakePictureScreen extends StatefulWidget {
 class TakePictureScreenState extends State<TakePictureScreen> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
+
 
   @override
   void initState() {
@@ -54,15 +61,20 @@ class TakePictureScreenState extends State<TakePictureScreen> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             // Future가 완료되면, 프리뷰를 보여줍니다.
-            return CameraPreview(_controller);
+            return Stack(
+              children: [
+                CameraPreview(_controller),
+
+              ],
+            );
           } else {
             // 그렇지 않다면, 진행 표시기를 보여줍니다.
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.camera_alt),
+        child: const Icon(Icons.camera_alt),
         // onPressed 콜백을 제공합니다.
         onPressed: () async {
           // try / catch 블럭에서 사진을 촬영합니다. 만약 뭔가 잘못된다면 에러에
@@ -72,46 +84,30 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             await _initializeControllerFuture;
 
             // path 패키지를 사용하여 이미지가 저장될 경로를 지정합니다.
-            final path = join(
-              // 본 예제에서는 임시 디렉토리에 이미지를 저장합니다. `path_provider`
-              // 플러그인을 사용하여 임시 디렉토리를 찾으세요.
-              (await getTemporaryDirectory()).path,
-              '${DateTime.now()}.png',
-            );
+            var path = '';
+
+            // join(
+            // // 본 예제에서는 임시 디렉토리에 이미지를 저장합니다. `path_provider`
+            // // 플러그인을 사용하여 임시 디렉토리를 찾으세요.
+            // (await getTemporaryDirectory()).path,
+            // '${DateTime.now()}.png',
+            // )
 
             // 사진 촬영을 시도하고 저장되는 경로를 로그로 남깁니다.
-            await _controller.takePicture();
+            _controller.takePicture().then((xFile) async {
+              setState(() {
+                path = xFile.path;
+              });
 
-            // 사진을 촬영하면, 새로운 화면으로 넘어갑니다.
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DisplayPictureScreen(imagePath: path),
-              ),
-            );
+              // 사진을 촬영하면, 새로운 화면으로 넘어갑니다.
+              Get.to(() => DisplayCaptureScreen(imagePath: path));
+            });
           } catch (e) {
             // 만약 에러가 발생하면, 콘솔에 에러 로그를 남깁니다.
             print(e);
           }
         },
       ),
-    );
-  }
-}
-
-// 사용자가 촬영한 사진을 보여주는 위젯
-class DisplayPictureScreen extends StatelessWidget {
-  final String imagePath;
-
-  const DisplayPictureScreen({required this.imagePath});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Display the Picture')),
-      // 이미지는 디바이스에 파일로 저장됩니다. 이미지를 보여주기 위해 주어진
-      // 경로로 `Image.file`을 생성하세요.
-      body: Image.file(File(imagePath)),
     );
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 import 'package:camera/camera.dart';
+import 'package:get/get.dart';
 import 'package:part_scan/take_picture_screen.dart';
 
 void main() => runApp(MyApp());
@@ -56,7 +57,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
         home: Scaffold(
             appBar: AppBar(title: const Text('Barcode scan')),
             body: Builder(builder: (BuildContext context) {
@@ -65,16 +66,17 @@ class _MyAppState extends State<MyApp> {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Container(
                               alignment: Alignment.center,
                               color: Colors.yellow,
-                              child: Text('Scan result : $_scanBarcode\n',
-                                  style: const TextStyle(fontSize: 16),
-                              textAlign: TextAlign.center,),
+                              child: Text(
+                                'Scan result : $_scanBarcode\n',
+                                style: const TextStyle(fontSize: 16),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                             const SizedBox(width: 10),
                             Container(
@@ -85,8 +87,10 @@ class _MyAppState extends State<MyApp> {
                             ),
                           ],
                         ),
-                        ElevatedButton(onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => TakePictureScreen(camera: firstCamera))), child: Text('사진 촬영'))
-
+                        ElevatedButton(
+                            onPressed: () => Get.to(
+                                () => TakePictureScreen(camera: firstCamera)),
+                            child: const Text('사진 촬영'))
                       ]));
             })));
   }

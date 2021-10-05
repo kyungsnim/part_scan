@@ -1,0 +1,134 @@
+{
+  "project_info": {
+    "project_number": "947933338011",
+    "project_id": "whozpet",
+    "storage_bucket": "whozpet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947933338011:android:0fbd8792379a729080693e",
+        "android_client_info": {
+          "package_name": "com.example.tiktok_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "947933338011-ht7o1bgllqkdisr3ivg88b6l9q2uvioj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5AHWhBKONpz-9ohWJv5hTJ66Kri3nQ5w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "947933338011-ht7o1bgllqkdisr3ivg88b6l9q2uvioj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "947933338011-1t97d2vn8iur861a0h75a60bq8alr3pc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.whozpet.tiktokFlutterSnsLogin"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947933338011:android:d9e3c440db45e15580693e",
+        "android_client_info": {
+          "package_name": "com.example.tiktok_flutter_sns_login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "947933338011-b3susk0jbl8gqlog62pmr8ldsp0h0vj8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tiktok_flutter_sns_login",
+            "certificate_hash": "c7db24fd69f5efb54f9069c9dae8f41fa7d666c3"
+          }
+        },
+        {
+          "client_id": "947933338011-khi1pnlfusgntutr3n3pa74npr42ri0e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tiktok_flutter_sns_login",
+            "certificate_hash": "0a74ed14678d43c05c05ba917a7d732fa9e09c33"
+          }
+        },
+        {
+          "client_id": "947933338011-ht7o1bgllqkdisr3ivg88b6l9q2uvioj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5AHWhBKONpz-9ohWJv5hTJ66Kri3nQ5w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "947933338011-ht7o1bgllqkdisr3ivg88b6l9q2uvioj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "947933338011-1t97d2vn8iur861a0h75a60bq8alr3pc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.whozpet.tiktokFlutterSnsLogin"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947933338011:android:c1703c70aa39624980693e",
+        "android_client_info": {
+          "package_name": "com.geodis.part_scan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "947933338011-ht7o1bgllqkdisr3ivg88b6l9q2uvioj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5AHWhBKONpz-9ohWJv5hTJ66Kri3nQ5w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "947933338011-ht7o1bgllqkdisr3ivg88b6l9q2uvioj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "947933338011-1t97d2vn8iur861a0h75a60bq8alr3pc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.whozpet.tiktokFlutterSnsLogin"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
