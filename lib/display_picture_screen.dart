@@ -19,6 +19,7 @@ class DisplayCaptureScreen extends StatefulWidget {
 class _DisplayCaptureScreenState extends State<DisplayCaptureScreen> {
   ScreenshotController _screenshotController = ScreenshotController();
   late Uint8List _imageFile;
+  String currentTime = '';
 
   @override
   void initState() {
@@ -26,7 +27,21 @@ class _DisplayCaptureScreenState extends State<DisplayCaptureScreen> {
     super.initState();
   }
 
+  getCurrentTime() {
+    String currentYear = '${DateTime.now().year}';
+    String currentMonth = DateTime.now().month < 10 ? '0${DateTime.now().month}' : '${DateTime.now().month}';
+    String currentDay = DateTime.now().day < 10 ? '0${DateTime.now().day}' : '${DateTime.now().day}';
+    String currentHour = DateTime.now().hour < 10 ? '0${DateTime.now().hour}' : '${DateTime.now().hour}';
+    String currentMinute = DateTime.now().minute < 10 ? '0${DateTime.now().minute}' : '${DateTime.now().minute}';
+    String currentSecond = DateTime.now().second < 10 ? '0${DateTime.now().second}' : '${DateTime.now().second}';
+
+    setState(() {
+      currentTime = '$currentYear/$currentMonth/$currentDay $currentHour:$currentMinute:$currentSecond';
+    });
+  }
+
   saveCurrentScreen() async {
+    getCurrentTime();
     await _screenshotController
         .capture(delay: const Duration(milliseconds: 1000))
         .then((Uint8List? image) async {
@@ -37,7 +52,7 @@ class _DisplayCaptureScreenState extends State<DisplayCaptureScreen> {
         await imagePath.writeAsBytes(image);
 
         /// Share Plugin
-        await Share.shareFiles([imagePath.path]);
+        // await Share.shareFiles([imagePath.path]);
       }
     });
   }
@@ -57,18 +72,33 @@ class _DisplayCaptureScreenState extends State<DisplayCaptureScreen> {
                   Positioned(
                     right: 20,
                     bottom: 20,
-                    child: Text(
-                        '${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day} ${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}',
-                        style: const TextStyle(
-                            shadows: [
-                              Shadow(
-                                  color: Colors.black87,
-                                  offset: Offset(1, 1),
-                                  blurRadius: 4)
-                            ],
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25,
-                            color: Colors.yellow)),
+                    child: Column(
+                      children: [
+                        const Text('GEODIS',
+                            style: TextStyle(
+                                shadows: [
+                                  Shadow(
+                                      color: Colors.white,
+                                      offset: Offset(1, 1),
+                                      blurRadius: 4)
+                                ],
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                                color: Colors.blue)),
+                        Text(
+                            currentTime,
+                            style: const TextStyle(
+                                shadows: [
+                                  Shadow(
+                                      color: Colors.black87,
+                                      offset: Offset(1, 1),
+                                      blurRadius: 4)
+                                ],
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                                color: Colors.yellow)),
+                      ],
+                    ),
                   )
                 ],
               ),
